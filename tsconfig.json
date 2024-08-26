@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "lib",
     "rootDir": "src",
+    "lib": ["es2018", "dom"],
     "paths": {
       "@utils/*": ["./src/utils/*"]
     }
