@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "lib",
     "rootDir": "src",
+    "moduleResolution": "Node16",
     "lib": ["es2018", "dom"],
     "paths": {
       "@utils/*": ["./src/utils/*"]
