@@ -1,7 +1,12 @@
+/* eslint-disable @typescript-eslint/no-unsafe-member-access */
+/* eslint-disable @typescript-eslint/no-unsafe-argument */
+/* eslint-disable @typescript-eslint/no-unsafe-call */
+/* eslint-disable @typescript-eslint/no-unsafe-assignment */
+/* eslint-disable sf-plugin/no-missing-messages */
 import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
 import { Messages } from '@salesforce/core';
 import got from 'got';
-import { exec2JSON } from './src/utils/exec.js';
+import { exec2JSON } from '@utils/exec.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('sf-demo-utils', 'demoutil.create.user');
@@ -62,7 +67,7 @@ export default class DemoutilCreateUser extends SfCommand<DemoutilCreateUserResu
     setdefaultusername: Flags.boolean({
       summary: messages.getMessage('flags.setdefaultusername.summary'),
       char: 's',
-    })
+    }),
   };
 
   public async run(): Promise<DemoutilCreateUserResult> {
@@ -81,39 +86,39 @@ export default class DemoutilCreateUser extends SfCommand<DemoutilCreateUserResu
     let command = `sfdx force:org:create --json -f ${flags.definitionfile} -d ${flags.durationdays} --wait ${
       flags.wait || 20
     }`;
-    
+
     // optional value 	flags without defaults
     if (flags.clientid) {
       command += ` -i ${flags.clientid}`;
-  }
+    }
 
-  // if (flags.targetdevhubusername) {
-  //     command += ` -v ${flags.targetdevhubusername}`;
-  // }
+    // if (flags.targetdevhubusername) {
+    //     command += ` -v ${flags.targetdevhubusername}`;
+    // }
 
-  if (flags.setalias) {
+    if (flags.setalias) {
       command += ` -a ${flags.setalias}`;
-  }
+    }
 
-  // optional boolean
-  if (flags.noancestors) {
+    // optional boolean
+    if (flags.noancestors) {
       command += ' -c';
-  }
+    }
 
-  if (flags.nonamespace) {
+    if (flags.nonamespace) {
       command += ' -n';
-  }
+    }
 
-  if (flags.setdefaultusername) {
+    if (flags.setdefaultusername) {
       command += ' -s';
-  }
+    }
 
-  if (flags.setdefaultusername) {
+    if (flags.setdefaultusername) {
       command += ` username=${JSON.parse(response.body).message}`;
-  }
-  this.log(`executing ${command}`);
+    }
+    this.log(`executing ${command}`);
 
-  const cliresponse = await exec2JSON(command);
+    const cliresponse = await exec2JSON(command);
     this.log(cliresponse);
     return {
       path: command,

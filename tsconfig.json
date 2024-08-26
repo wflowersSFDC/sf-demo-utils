@@ -7,5 +7,5 @@
       "@utils/*": ["./src/utils/*"]
     }
   },
-  "include": ["./src/**/*.ts", "src/utils/exec.js", "src/commands/demoutil/create/user.js"]
+  "include": ["./src/**/*.ts", "src/utils/exec.js", "src/commands/demoutil/create/user.ts"]
 }
