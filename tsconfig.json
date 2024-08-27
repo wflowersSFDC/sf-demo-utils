@@ -1,13 +1,16 @@
 {
   "extends": "@salesforce/dev-config/tsconfig-strict-esm",
   "compilerOptions": {
+    "allowJs": false,
     "outDir": "lib",
     "rootDir": "src",
-    "moduleResolution": "Node16",
-    "lib": ["es2018", "dom"],
+    "lib": ["esNext", "dom"],
+    "baseUrl": "./",
     "paths": {
-      "@utils/*": ["./src/utils/*"]
-    }
+      /* "@utils/*": ["./src/utils/*"] */
+    },
+    "types": ["node", "js2xmlparser", "@types/jsforce/describe-result"],
+    "target": "ES6"
   },
-  "include": ["./src/**/*.ts", "src/utils/exec.js", "src/commands/demoutil/create/user.ts"]
+  "include": ["./src/**/*.ts", "src/commands/demoutil/create/user.ts"]
 }

@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable no-restricted-imports */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
 /* eslint-disable @typescript-eslint/no-unsafe-argument */
@@ -7,7 +8,7 @@
 import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
 import { Messages } from '@salesforce/core';
 import got from 'got';
-import { exec2JSON } from 'src/utils/exec';
+import { exec2JSON } from '../../../utils/exec.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('sf-demo-utils', 'demoutil.create.user');
@@ -80,49 +81,48 @@ export default class DemoutilCreateUser extends SfCommand<DemoutilCreateUserResu
       json: { prefix: flags.userprefix, domain: flags.userdomain },
     });
 
-    // const name = flags.name?? 'world';
     this.log(JSON.parse(response.body).message);
 
-    // required flags
-    let command = `sfdx force:org:create --json -f ${flags.definitionfile} -d ${flags.durationdays} --wait ${
+    let command = `sf org create scratch --json -f ${flags.definitionfile} -y ${flags.durationdays} -w ${
       flags.wait || 20
     }`;
 
-    // optional value 	flags without defaults
     if (flags.clientid) {
       command += ` -i ${flags.clientid}`;
     }
-
-    // if (flags.targetdevhubusername) {
-    //     command += ` -v ${flags.targetdevhubusername}`;
-    // }
 
     if (flags.setalias) {
       command += ` -a ${flags.setalias}`;
     }
 
-    // optional boolean
     if (flags.noancestors) {
       command += ' -c';
     }
 
     if (flags.nonamespace) {
-      command += ' -n';
+      command += ' -m';
     }
 
     if (flags.setdefaultusername) {
-      command += ' -s';
-    }
-
-    if (flags.setdefaultusername) {
-      command += ` username=${JSON.parse(response.body).message}`;
+      command += ` --username=${JSON.parse(response.body).message}`;
     }
     this.log(`executing ${command}`);
 
-    const cliresponse = await exec2JSON(command);
+    let cliresponse: string | undefined;
+    try {
+      const execResult = await exec2JSON(command);
+      if (typeof execResult === 'string') {
+        cliresponse = execResult;
+      } else if (typeof execResult === 'object' && execResult !== null) {
+        this.log(JSON.stringify(execResult));
+        return { path: command };
+      }
+    } catch (error) {
+      this.log(`Error executing command: ${error}`);
+      return { path: command };
+    }
+
     this.log(cliresponse);
-    return {
-      path: command,
-    };
+    return { path: command };
   }
 }
