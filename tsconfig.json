@@ -6,10 +6,7 @@
     "rootDir": "src",
     "lib": ["esNext", "dom"],
     "baseUrl": "./",
-    "paths": {
-      /* "@utils/*": ["./src/utils/*"] */
-    },
-    "types": ["node", "js2xmlparser", "@types/jsforce/describe-result"],
+    "types": ["node", "js2xmlparser", "@types/jsforce/describe-result", "@types/jest"],
     "target": "ES6"
   },
   "include": ["./src/**/*.ts", "src/commands/demoutil/create/scratch.ts"]
