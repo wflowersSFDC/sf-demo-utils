@@ -1,25 +1,25 @@
 {
   "name": "sf-demo-utils",
-  "description": "",
+  "description": "[![NPM](https://img.shields.io/npm/v/sf-demo-utils.svg?label=sf-demo-utils)](https://www.npmjs.com/package/sf-demo-utils) [![Downloads/week](https://img.shields.io/npm/dw/sf-demo-utils.svg)](https://npmjs.org/package/sf-demo-utils) [![License](https://img.shields.io/badge/License-BSD%203--Clause-brightgreen.svg)](https://raw.githubusercontent.com/salesforcecli/sf-demo-utils/main/LICENSE.txt)",
   "version": "1.0.0",
   "dependencies": {
     "@lifeomic/attempt": "^3.1.0",
-    "@oclif/core": "^4",
-    "@salesforce/core": "^7.2.0",
-    "@salesforce/sf-plugins-core": "^10.0.0",
+    "@oclif/core": "^4.0.19",
+    "@salesforce/core": "^8.5.4",
+    "@salesforce/sf-plugins-core": "^11.3.7",
     "got": "^14.4.2",
     "strip-color": "^0.1.0"
   },
   "devDependencies": {
-    "@oclif/plugin-command-snapshot": "^5.1.9",
-    "@salesforce/cli-plugins-testkit": "^5.3.10",
-    "@salesforce/dev-scripts": "^10",
+    "@oclif/plugin-command-snapshot": "^5.2.15",
+    "@salesforce/cli-plugins-testkit": "^5.3.28",
+    "@salesforce/dev-scripts": "^10.2.10",
     "@types/jsforce": "^1.11.5",
     "@types/strip-color": "^0.1.2",
-    "eslint-plugin-sf-plugin": "^1.18.6",
-    "oclif": "^4.14.0",
+    "eslint-plugin-sf-plugin": "^1.20.6",
+    "oclif": "^4.14.29",
     "ts-node": "^10.9.2",
-    "typescript": "^5.4.5"
+    "typescript": "^5.5.4"
   },
   "engines": {
     "node": ">=18.0.0"
@@ -55,7 +55,12 @@
         "description": "description for demoutil",
         "subtopics": {
           "create": {
-            "description": "description for demoutil.create"
+            "description": "description for demoutil.create",
+            "subtopics": {
+              "scratch": {
+                "description": "description for demoutil.create.scratch"
+              }
+            }
           },
           "user": {
             "description": "description for demoutil.user",
@@ -203,5 +208,13 @@
   },
   "exports": "./lib/index.js",
   "type": "module",
-  "author": "Trey Flowers"
+  "author": "Trey Flowers",
+  "main": "index.js",
+  "bin": {
+    "sf-demo-utils": "bin/dev.js"
+  },
+  "directories": {
+    "lib": "lib",
+    "test": "test"
+  }
 }

@@ -45,14 +45,19 @@ export default class DemoutilUserPasswordSet extends SfCommand<DemoutilUserPassw
   public async run(): Promise<DemoutilUserPasswordSetResult> {
     const { flags } = await this.parse(DemoutilUserPasswordSet);
     const org: Org = await Org.create();
-    const conn: Connection = org.getConnection();
+    const conn: Connection = org.getConnection('61.0');
     const user = await getUserId(conn, flags.lastname, flags.firstname);
+
+    if (!user || !user.Id) {
+      throw new Error('User not found'); // or handle this case as appropriate for your application
+    }
+
     this.log(`found user with id ${user.Id}`);
 
     const resetResult = await got.post({
       url: `${conn.instanceUrl}/services/data/v61.0/sobjects/User/${user.Id}/password`,
       headers: {
-        Authorization: `Bearer ${conn.accessToken}`,
+        Authorization: `Bearer ${assertNotNull(conn.accessToken)}`,
         'Content-Type': 'application/json',
       },
       json: {
@@ -64,12 +69,19 @@ export default class DemoutilUserPasswordSet extends SfCommand<DemoutilUserPassw
       throw new Error(`Password not set correctly: ${JSON.stringify(resetResult)}`);
     }
 
-    this.log(`Successfully set the password "${flags.password}" for user ${user.Username}.`);
+    this.log(`Successfully set the password "${flags.password}" for user ${user.Username ?? 'unknown username'}.`);
     // this.log(`You can see the password again by running "sfdx force:user:display -u ${user.Username}".`);
 
     return {
-      username: user.Username ? user.Username : '',
+      username: user.Username ? user.Username : '', // use a default value if Username is undefined
       password: flags.password,
     };
   }
+}
+
+function assertNotNull<T>(value: T | null | undefined): T {
+  if (value === null || value === undefined) {
+    throw new Error('Value must not be null or undefined');
+  }
+  return value;
 }

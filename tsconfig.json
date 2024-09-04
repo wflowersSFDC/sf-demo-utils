@@ -12,5 +12,5 @@
     "types": ["node", "js2xmlparser", "@types/jsforce/describe-result"],
     "target": "ES6"
   },
-  "include": ["./src/**/*.ts", "src/commands/demoutil/create/user.ts"]
+  "include": ["./src/**/*.ts", "src/commands/demoutil/create/scratch.ts"]
 }
