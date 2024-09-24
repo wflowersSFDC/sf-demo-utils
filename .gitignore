@@ -10,6 +10,8 @@ package-lock.json
 npm-error.log
 yarn-error.log
 
+.yarn
+.yarnrc
 
 # compile source
 lib
