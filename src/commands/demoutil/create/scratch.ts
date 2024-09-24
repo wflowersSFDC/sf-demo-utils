@@ -83,7 +83,7 @@ export default class DemoutilCreateScratch extends SfCommand<DemoutilCreateScrat
 
     this.log(JSON.parse(response.body).message);
 
-    let command = `sf org create scratch --json -f ${flags.definitionfile} -y ${flags.durationdays} -w ${
+    let command = `sf org create scratch --json -d -f ${flags.definitionfile} -y ${flags.durationdays} -w ${
       flags.wait || 20
     }`;
 
