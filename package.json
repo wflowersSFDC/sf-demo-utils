@@ -1,7 +1,7 @@
 {
   "name": "sf-demo-utils",
   "description": "[![NPM](https://img.shields.io/npm/v/sf-demo-utils.svg?label=sf-demo-utils)](https://www.npmjs.com/package/sf-demo-utils) [![Downloads/week](https://img.shields.io/npm/dw/sf-demo-utils.svg)](https://npmjs.org/package/sf-demo-utils) [![License](https://img.shields.io/badge/License-BSD%203--Clause-brightgreen.svg)](https://raw.githubusercontent.com/salesforcecli/sf-demo-utils/main/LICENSE.txt)",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "dependencies": {
     "@lifeomic/attempt": "^3.1.0",
     "@oclif/core": "^4.0.19",
