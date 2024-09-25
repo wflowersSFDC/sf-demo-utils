@@ -14,27 +14,4 @@ describe('demoutil create scratch', () => {
   afterEach(() => {
     $$.restore();
   });
-
-  // it('runs hello', async () => {
-  //   await DemoutilCreateScratch.run([]);
-  //   const output = sfCommandStubs.log
-  //     .getCalls()
-  //     .flatMap((c) => c.args)
-  //     .join('\n');
-  //   expect(output).to.include('hello world');
-  // });
-
-  // it('runs hello with --json and no provided name', async () => {
-  //   const result = await DemoutilCreateScratch.run([]);
-  //   expect(result.path).to.equal('src/commands/demoutil/create/scratch.ts');
-  // });
-
-  // it('runs hello world --name Astro', async () => {
-  //   await DemoutilCreateScratch.run(['--name', 'Astro']);
-  //   const output = sfCommandStubs.log
-  //     .getCalls()
-  //     .flatMap((c) => c.args)
-  //     .join('\n');
-  //   expect(output).to.include('hello Astro');
-  // });
 });

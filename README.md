@@ -1,145 +1,81 @@
-# sf-demo-utils
+# SF Demo Utils CLI Plugin Documentation
 
-[![NPM](https://img.shields.io/npm/v/sf-demo-utils.svg?label=sf-demo-utils)](https://www.npmjs.com/package/sf-demo-utils) [![Downloads/week](https://img.shields.io/npm/dw/sf-demo-utils.svg)](https://npmjs.org/package/sf-demo-utils) [![License](https://img.shields.io/badge/License-BSD%203--Clause-brightgreen.svg)](https://raw.githubusercontent.com/salesforcecli/sf-demo-utils/main/LICENSE.txt)
+Welcome to the documentation for the `sf-demo-utils` Salesforce CLI plugin. This plugin provides a set of commands designed to assist with managing and automating various tasks related to Salesforce development, such as creating scratch orgs, updating transaction security policies, and setting user passwords.
 
-## Using the template
+## Overview
 
-This repository provides a template for creating a plugin for the Salesforce CLI. To convert this template to a working plugin:
+The `sf-demo-utils` plugin is an extension for the Salesforce CLI, enabling users to perform specific actions without leaving their terminal environment. The primary commands available through this plugin include:
 
-1. Please get in touch with the Platform CLI team. We want to help you develop your plugin.
-2. Generate your plugin:
+1. **Create Scratch Org**: Automatically provisions a new scratch org based on a provided configuration file and sets it as the default username if specified.
+2. **Update Transaction Security Policies**: Updates transaction security policies in a specified directory to use the current user's username.
+3. **Set User Password**: Allows administrators to set or reset the password for a user identified by their first and last name.
 
-   ```
-   sf plugins install dev
-   sf dev generate plugin
+## Installation
 
-   git init -b main
-   git add . && git commit -m "chore: initial commit"
-   ```
+To install the `sf-demo-utils` plugin, you can use the following command:
 
-3. Create your plugin's repo in the salesforcecli github org
-4. When you're ready, replace the contents of this README with the information you want.
-
-## Learn about `sf` plugins
-
-Salesforce CLI plugins are based on the [oclif plugin framework](<(https://oclif.io/docs/introduction.html)>). Read the [plugin developer guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_cli_plugins.meta/sfdx_cli_plugins/cli_plugins_architecture_sf_cli.htm) to learn about Salesforce CLI plugin development.
-
-This repository contains a lot of additional scripts and tools to help with general Salesforce node development and enforce coding standards. You should familiarize yourself with some of the [node developer packages](#tooling) used by Salesforce.
-
-Additionally, there are some additional tests that the Salesforce CLI will enforce if this plugin is ever bundled with the CLI. These test are included by default under the `posttest` script and it is required to keep these tests active in your plugin if you plan to have it bundled.
-
-### Tooling
-
-- [@salesforce/core](https://github.com/forcedotcom/sfdx-core)
-- [@salesforce/kit](https://github.com/forcedotcom/kit)
-- [@salesforce/sf-plugins-core](https://github.com/salesforcecli/sf-plugins-core)
-- [@salesforce/ts-types](https://github.com/forcedotcom/ts-types)
-- [@salesforce/ts-sinon](https://github.com/forcedotcom/ts-sinon)
-- [@salesforce/dev-config](https://github.com/forcedotcom/dev-config)
-- [@salesforce/dev-scripts](https://github.com/forcedotcom/dev-scripts)
-
-### Hooks
-
-For cross clouds commands, e.g. `sf env list`, we utilize [oclif hooks](https://oclif.io/docs/hooks) to get the relevant information from installed plugins.
-
-This plugin includes sample hooks in the [src/hooks directory](src/hooks). You'll just need to add the appropriate logic. You can also delete any of the hooks if they aren't required for your plugin.
-
-# Everything past here is only a suggestion as to what should be in your specific plugin's description
-
-This plugin is bundled with the [Salesforce CLI](https://developer.salesforce.com/tools/sfdxcli). For more information on the CLI, read the [getting started guide](https://developer.salesforce.com/docs/atlas.en-us.sfdx_setup.meta/sfdx_setup/sfdx_setup_intro.htm).
-
-We always recommend using the latest version of these commands bundled with the CLI, however, you can install a specific version or tag if needed.
-
-## Install
-
-```bash
-sf plugins install sf-demo-utils@x.y.z
-```
-
-## Issues
-
-Please report any issues at https://github.com/forcedotcom/cli/issues
-
-## Contributing
-
-1. Please read our [Code of Conduct](CODE_OF_CONDUCT.md)
-2. Create a new issue before starting your project so that we can keep track of
-   what you are trying to add/fix. That way, we can also offer suggestions or
-   let you know if there is already an effort in progress.
-3. Fork this repository.
-4. [Build the plugin locally](#build)
-5. Create a _topic_ branch in your fork. Note, this step is recommended but technically not required if contributing using a fork.
-6. Edit the code in your fork.
-7. Write appropriate tests for your changes. Try to achieve at least 95% code coverage on any new code. No pull request will be accepted without unit tests.
-8. Sign CLA (see [CLA](#cla) below).
-9. Send us a pull request when you are done. We'll review your code, suggest any needed changes, and merge it in.
-
-### CLA
-
-External contributors will be required to sign a Contributor's License
-Agreement. You can do so by going to https://cla.salesforce.com/sign-cla.
-
-### Build
-
-To build the plugin locally, make sure to have yarn installed and run the following commands:
-
-```bash
-# Clone the repository
-git clone git@github.com:salesforcecli/sf-demo-utils
-
-# Install the dependencies and compile
-yarn && yarn build
-```
-
-To use your plugin, run using the local `./bin/dev` or `./bin/dev.cmd` file.
-
-```bash
-# Run using local run file.
-./bin/dev hello world
-```
-
-There should be no differences when running via the Salesforce CLI or using the local run file. However, it can be useful to link the plugin to do some additional testing or run your commands from anywhere on your machine.
-
-```bash
-# Link your plugin to the sf cli
-sf plugins link .
-# To verify
-sf plugins
+```sh
+sf plugins install sf-demo-utils
 ```
 
 ## Commands
 
-<!-- commands -->
+### 1. Create Scratch Org
 
-- [`sf hello world`](#sf-hello-world)
+#### Summary
 
-## `sf hello world`
+Creates a scratch org with a unique username based on provided prefix and domain.
 
-Say hello either to the world or someone you know.
+#### Description
 
-```
-USAGE
-  $ sf hello world [--json] [-n <value>]
+This command allows users to set the username prefix and domain, then generates a new org using these parameters along with other optional flags such as duration and namespace settings. The generated org's default username is automatically set if specified.
 
-FLAGS
-  -n, --name=<value>  [default: World] The name of the person you'd like to say hello to.
+#### Examples
 
-GLOBAL FLAGS
-  --json  Format output as json.
-
-DESCRIPTION
-  Say hello either to the world or someone you know.
-
-  Say hello either to the world or someone you know.
-
-EXAMPLES
-  Say hello to the world:
-
-    $ sf hello world
-
-  Say hello to someone you know:
-
-    $ sf hello world --name Astro
+```sh
+sf demoutil org create scratch -p ace -e ventura.com -d 20 -w 10 -f config/project-scratch-def.json -s
 ```
 
-<!-- commandsstop -->
+### 2. Update Transaction Security Policies
+
+#### Summary
+
+Updates transaction security policies in a specified directory to use the current user's username.
+
+#### Description
+
+This command reads through all applicable policy files in the given directory and updates them to include the currently set username, ensuring consistency across environments.
+
+#### Examples
+
+```sh
+sf demoutil tsp update -d /your/project/directory
+```
+
+### 3. Set User Password
+
+#### Summary
+
+Sets or resets a user's password based on their first and last name.
+
+#### Description
+
+Users can specify the first and last names of the target user to reset their password securely, ensuring that all necessary permissions are met before making changes.
+
+#### Examples
+
+```sh
+sf demoutil user password set -l User -f John -p newPassword123
+```
+
+## Usage
+
+Each command can be invoked with specific flags and arguments as outlined in the examples provided above. Ensure you have the necessary permissions to execute these actions within your Salesforce environment.
+
+## Support
+
+For further assistance or if you encounter any issues, please refer to the official documentation for each command or contact support@salesforce.com.
+
+---
+
+Thank you for using the `sf-demo-utils` plugin! We hope this documentation aids in your automation and development workflows on Salesforce platforms.

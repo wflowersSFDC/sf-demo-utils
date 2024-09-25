@@ -11,11 +11,4 @@ describe('demoutil user password set NUTs', () => {
   after(async () => {
     await session?.clean();
   });
-
-  it('should display provided name', () => {
-    const name = 'World';
-    const command = `demoutil user password set --name ${name}`;
-    const output = execCmd(command, { ensureExitCode: 0 }).shellOutput.stdout;
-    expect(output).to.contain(name);
-  });
 });

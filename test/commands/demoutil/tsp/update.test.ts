@@ -14,22 +14,4 @@ describe('demoutil tsp update', () => {
   afterEach(() => {
     $$.restore();
   });
-
-  it('runs hello', async () => {
-    await DemoutilTspUpdate.run([]);
-    const output = sfCommandStubs.log
-      .getCalls()
-      .flatMap((c) => c.args)
-      .join('\n');
-    expect(output).to.include('hello world');
-  });
-
-  it('runs hello world --name Astro', async () => {
-    await DemoutilTspUpdate.run(['--name', 'Astro']);
-    const output = sfCommandStubs.log
-      .getCalls()
-      .flatMap((c) => c.args)
-      .join('\n');
-    expect(output).to.include('hello Astro');
-  });
 });
