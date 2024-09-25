@@ -17,21 +17,17 @@ export default class DemoutilUserPasswordSet extends SfCommand<DemoutilUserPassw
   public static readonly examples = messages.getMessages('examples');
 
   public static readonly flags = {
-    name: Flags.string({
-      summary: messages.getMessage('flags.name.summary'),
-      description: messages.getMessage('flags.name.description'),
-      char: 'n',
-      required: false,
-    }),
     firstname: Flags.string({
       summary: messages.getMessage('flags.firstname.summary'),
       char: 'g',
       required: true,
+      default: 'User',
     }),
     lastname: Flags.string({
       summary: messages.getMessage('flags.lastname.summary'),
       char: 'l',
       required: true,
+      default: 'User',
     }),
     password: Flags.string({
       summary: messages.getMessage('flags.password.summary'),
@@ -52,7 +48,7 @@ export default class DemoutilUserPasswordSet extends SfCommand<DemoutilUserPassw
       throw new Error('User not found'); // or handle this case as appropriate for your application
     }
 
-    this.log(`found user with id ${user.Id}`);
+    this.log(`Found user with id ${user.Id}`);
 
     const resetResult = await got.post({
       url: `${conn.instanceUrl}/services/data/v61.0/sobjects/User/${user.Id}/password`,
@@ -69,7 +65,9 @@ export default class DemoutilUserPasswordSet extends SfCommand<DemoutilUserPassw
       throw new Error(`Password not set correctly: ${JSON.stringify(resetResult)}`);
     }
 
-    this.log(`Successfully set the password "${flags.password}" for user ${user.Username ?? 'unknown username'}.`);
+    this.logSuccess(
+      `Successfully set the password "${flags.password}" for user ${user.Username ?? 'unknown username'}.`
+    );
     // this.log(`You can see the password again by running "sfdx force:user:display -u ${user.Username}".`);
 
     return {

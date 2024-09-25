@@ -1,7 +1,7 @@
 import { execCmd, TestSession } from '@salesforce/cli-plugins-testkit';
 import { expect } from 'chai';
 
-describe('demoutil create user NUTs', () => {
+describe('demoutil org create scratch NUTs', () => {
   let session: TestSession;
 
   before(async () => {
@@ -14,7 +14,7 @@ describe('demoutil create user NUTs', () => {
 
   it('should display provided name', () => {
     const name = 'World';
-    const command = `demoutil create user --name ${name}`;
+    const command = `demoutil org create scratch --name ${name}`;
     const output = execCmd(command, { ensureExitCode: 0 }).shellOutput.stdout;
     expect(output).to.contain(name);
   });

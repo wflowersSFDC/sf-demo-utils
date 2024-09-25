@@ -11,6 +11,8 @@
   "rules": {
       "no-await-in-loop": "warn",
       "no-plusplus": "warn",
+      "no-console": "warn",
+      "sf-plugin/no-missing-messages": "off",
       "no-use-before-define": "off",
       "import/prefer-default-export": "warn",
       "@typescript-eslint/camelcase": "off",

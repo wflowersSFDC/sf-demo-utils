@@ -3,5 +3,7 @@ module.exports = {
   root: true,
   rules: {
     header: 'off',
+    'no-console': 'warn',
+    'sf-plugin/no-missing-messages': 'off',
   },
 };

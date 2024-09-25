@@ -8,16 +8,12 @@
 import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
 import { Messages } from '@salesforce/core';
 import got from 'got';
-import { exec2JSON } from '../../../utils/exec.js';
+import { exec2JSON } from '../../../../utils/exec.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
-const messages = Messages.loadMessages('sf-demo-utils', 'demoutil.create.scratch');
+const messages = Messages.loadMessages('sf-demo-utils', 'demoutil.org.create.scratch');
 
-export type DemoutilCreateScratchResult = {
-  path: string;
-};
-
-export default class DemoutilCreateScratch extends SfCommand<DemoutilCreateScratchResult> {
+export default class DemoutilOrgCreateScratch extends SfCommand<object> {
   public static readonly summary = messages.getMessage('summary');
   public static readonly description = messages.getMessage('description');
   public static readonly examples = messages.getMessages('examples');
@@ -72,8 +68,8 @@ export default class DemoutilCreateScratch extends SfCommand<DemoutilCreateScrat
     }),
   };
 
-  public async run(): Promise<DemoutilCreateScratchResult> {
-    const { flags } = await this.parse(DemoutilCreateScratch);
+  public async run(): Promise<object> {
+    const { flags } = await this.parse(DemoutilOrgCreateScratch);
 
     // Generate the unique username
     const usernameURL = 'https://unique-username-generator.herokuapp.com/unique';
@@ -81,7 +77,7 @@ export default class DemoutilCreateScratch extends SfCommand<DemoutilCreateScrat
       json: { prefix: flags.userprefix, domain: flags.userdomain },
     });
 
-    this.log(JSON.parse(response.body).message);
+    this.log('Generated unique username:', JSON.parse(response.body).message);
 
     let command = `sf org create scratch --json -d -f ${flags.definitionfile} -y ${flags.durationdays} -w ${
       flags.wait || 20
@@ -108,21 +104,18 @@ export default class DemoutilCreateScratch extends SfCommand<DemoutilCreateScrat
     }
     this.log(`executing ${command}`);
 
-    let cliresponse: string | undefined;
+    let cliResponse = Object;
     try {
       const execResult = await exec2JSON(command);
-      if (typeof execResult === 'string') {
-        cliresponse = execResult;
-      } else if (typeof execResult === 'object' && execResult !== null) {
-        this.log(JSON.stringify(execResult));
-        return { path: command };
+      this.logJson(execResult.result);
+      cliResponse = execResult.result;
+      if (execResult.status === 0) {
+        this.logSuccess(`Org created with id ${execResult.result.orgId} and username ${execResult.result.username} `);
       }
     } catch (error) {
-      this.log(`Error executing command: ${error}`);
-      return { path: command };
+      this.error(`Error executing command: ${error}`);
     }
 
-    this.log(cliresponse);
-    return { path: command };
+    return cliResponse;
   }
 }

@@ -5,7 +5,8 @@ import * as util from 'node:util';
 
 const execProm = util.promisify(exec);
 
-const exec2JSON = async (cmd: string, options = {}): Promise<unknown> => {
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+const exec2JSON = async (cmd: string, options = {}): Promise<any> => {
   try {
     const results = await execProm(cmd, options);
     return JSON.parse(results.stdout);

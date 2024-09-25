@@ -1,32 +1,23 @@
 # summary
 
-Summary of a command.
+Set password for user.
 
 # description
 
-More information about a command. Don't repeat the summary. 
-
-# flags.name.summary
-
-Description of a flag.
-
-# flags.name.description
-
-More information about a flag. Don't repeat the summary. 
+Sets the password for a user based on their first and last name.
 
 # examples
 
 - <%= config.bin %> <%= command.id %>
 
-
 # flags.firstname.summary
 
-Summary for firstname.
+User's first name.
 
 # flags.lastname.summary
 
-Summary for lastname.
+User's last name.
 
 # flags.password.summary
 
-Summary for password.
+New password for user.

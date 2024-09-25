@@ -7,6 +7,8 @@
     "@oclif/core": "^4.0.19",
     "@salesforce/core": "^8.5.4",
     "@salesforce/sf-plugins-core": "^11.3.7",
+    "@types/node": "^22.7.0",
+    "fs": "^0.0.1-security",
     "got": "^14.4.2",
     "strip-color": "^0.1.0"
   },
@@ -49,11 +51,8 @@
       "@oclif/plugin-help"
     ],
     "topics": {
-      "hello": {
-        "description": "Commands to say hello."
-      },
       "demoutil": {
-        "description": "description for demoutil",
+        "description": "Utilities to make autoprovisioning scratch orgs easier",
         "subtopics": {
           "create": {
             "description": "description for demoutil.create",
@@ -68,6 +67,17 @@
             "subtopics": {
               "password": {
                 "description": "description for demoutil.user.password"
+              }
+            }
+          },
+          "tsp": {
+            "description": "description for demoutil.tsp"
+          },
+          "org": {
+            "description": "description for demoutil.org",
+            "subtopics": {
+              "create": {
+                "description": "description for demoutil.org.create"
               }
             }
           }
