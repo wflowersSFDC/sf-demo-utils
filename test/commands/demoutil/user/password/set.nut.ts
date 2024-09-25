@@ -1,5 +1,4 @@
-import { execCmd, TestSession } from '@salesforce/cli-plugins-testkit';
-import { expect } from 'chai';
+import { TestSession } from '@salesforce/cli-plugins-testkit';
 
 describe('demoutil user password set NUTs', () => {
   let session: TestSession;
