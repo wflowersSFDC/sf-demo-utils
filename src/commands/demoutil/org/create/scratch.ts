@@ -8,7 +8,7 @@
 import { SfCommand, Flags } from '@salesforce/sf-plugins-core';
 import { Messages } from '@salesforce/core';
 import got from 'got';
-import { exec2JSON } from 'src/utils/exec.js';
+import { exec2JSON } from '../../../../utils/exec.js';
 
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('sf-demo-utils', 'demoutil.org.create.scratch');
@@ -107,7 +107,7 @@ export default class DemoutilOrgCreateScratch extends SfCommand<object> {
     let cliResponse = Object;
     try {
       const execResult = await exec2JSON(command);
-      this.logJson(execResult.result);
+      // this.logJson(execResult.result);
       cliResponse = execResult.result;
       if (execResult.status === 0) {
         this.logSuccess(`Org created with id ${execResult.result.orgId} and username ${execResult.result.username} `);
