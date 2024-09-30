@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-unsafe-return */
+/* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/restrict-template-expressions */
 /* eslint-disable no-restricted-imports */
 /* eslint-disable @typescript-eslint/no-unsafe-member-access */
@@ -13,7 +15,7 @@ import { exec2JSON } from '../../../../utils/exec.js';
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('sf-demo-utils', 'demoutil.org.create.scratch');
 
-export default class DemoutilOrgCreateScratch extends SfCommand<object> {
+export default class DemoutilOrgCreateScratch extends SfCommand<any> {
   public static readonly summary = messages.getMessage('summary');
   public static readonly description = messages.getMessage('description');
   public static readonly examples = messages.getMessages('examples');
@@ -68,7 +70,7 @@ export default class DemoutilOrgCreateScratch extends SfCommand<object> {
     }),
   };
 
-  public async run(): Promise<object> {
+  public async run(): Promise<any> {
     const { flags } = await this.parse(DemoutilOrgCreateScratch);
 
     // Generate the unique username
@@ -104,7 +106,7 @@ export default class DemoutilOrgCreateScratch extends SfCommand<object> {
     }
     this.log(`executing ${command}`);
 
-    let cliResponse = await exec2JSON(command);
+    const cliResponse = await exec2JSON(command);
     try {
       this.logJson(cliResponse.result);
       if (cliResponse.status === 0) {
