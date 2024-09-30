@@ -110,7 +110,7 @@ export default class DemoutilOrgCreateScratch extends SfCommand<object> {
       // this.logJson(execResult.result);
       cliResponse = execResult.result;
       if (execResult.status === 0) {
-        this.logSuccess(`Org created with id ${execResult.result.orgId} and username ${execResult.result.username} `);
+        this.log(`Org created with id ${execResult.result.orgId} and username ${execResult.result.username} `);
       }
     } catch (error) {
       this.error(`Error executing command: ${error}`);
