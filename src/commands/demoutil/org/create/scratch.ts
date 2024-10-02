@@ -79,7 +79,7 @@ export default class DemoutilOrgCreateScratch extends SfCommand<any> {
       json: { prefix: flags.userprefix, domain: flags.userdomain },
     });
 
-    this.log('Generated unique username:', JSON.parse(response.body).message);
+    // this.log('Generated unique username:', JSON.parse(response.body).message);
 
     let command = `sf org create scratch --json -d -f ${flags.definitionfile} -y ${flags.durationdays} -w ${
       flags.wait || 20
