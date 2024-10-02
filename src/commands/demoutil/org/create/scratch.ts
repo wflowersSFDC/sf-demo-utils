@@ -108,7 +108,10 @@ export default class DemoutilOrgCreateScratch extends SfCommand<any> {
 
     const cliResponse = await exec2JSON(command);
     try {
-      this.logJson(cliResponse.result);
+      if (!flags.json) {
+        this.logJson(cliResponse.result);
+      }
+
       if (cliResponse.status === 0) {
         this.log(`Org created with id ${cliResponse.result.orgId} and username ${cliResponse.result.username} `);
         return cliResponse.result;
