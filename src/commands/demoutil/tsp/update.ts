@@ -8,7 +8,7 @@ import { Messages, Org } from '@salesforce/core';
 Messages.importMessagesDirectoryFromMetaUrl(import.meta.url);
 const messages = Messages.loadMessages('sf-demo-utils', 'demoutil.tsp.update');
 
-export default class DemoutilTspUpdate extends SfCommand<void> {
+export default class DemoutilTspUpdate extends SfCommand<any> {
   public static readonly summary = messages.getMessage('summary');
   public static readonly description = messages.getMessage('description');
   public static readonly examples = messages.getMessages('examples');
@@ -22,7 +22,7 @@ export default class DemoutilTspUpdate extends SfCommand<void> {
     }),
   };
 
-  public async run(): Promise<void> {
+  public async run(): Promise<any> {
     const { flags } = await this.parse(DemoutilTspUpdate);
     const policyDir = path.join(flags.directory ?? '.', 'transactionSecurityPolicies');
     const org: Org = await Org.create();
@@ -79,6 +79,7 @@ export default class DemoutilTspUpdate extends SfCommand<void> {
       } else {
         this.logSuccess(`Updated ${updatedCount} transaction security policy files.`);
       }
+      return `{'message':'Updated ${updatedCount} transaction security policy files.'}`;
     } catch (error) {
       if (error instanceof Error) {
         this.error(error.message, { exit: false });
