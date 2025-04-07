@@ -80,6 +80,9 @@
                 "description": "description for demoutil.org.create"
               }
             }
+          },
+          "agent": {
+            "description": "description for demoutil.agent"
           }
         }
       }
