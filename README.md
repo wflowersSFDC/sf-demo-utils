@@ -9,6 +9,7 @@ The `sf-demo-utils` plugin is an extension for the Salesforce CLI, enabling user
 1. **Create Scratch Org**: Automatically provisions a new scratch org based on a provided configuration file and sets it as the default username if specified.
 2. **Update Transaction Security Policies**: Updates transaction security policies in a specified directory to use the current user's username.
 3. **Set User Password**: Allows administrators to set or reset the password for a user identified by their first and last name.
+4. **Update Einstein Agent User in Bots**: Finds the Einstein Agent User and updates the botUser tag in Einstein Service Agent bots.
 
 ## Installation
 
@@ -66,6 +67,23 @@ Users can specify the first and last names of the target user to reset their pas
 
 ```sh
 sf demoutil user password set -l User -f John -p newPassword123
+```
+
+### 4. Update Einstein Agent User in Bots
+
+#### Summary
+
+Updates Einstein Agent User in bot metadata files.
+
+#### Description
+
+This command finds the user with profile 'Einstein Agent User' in the org and updates the botUser tag in all Einstein Service Agent bots. It recursively searches through all subdirectories in the bots directory to find all bot metadata files.
+
+#### Examples
+
+```sh
+sf demoutil agent userupdate
+sf demoutil agent userupdate -d /your/project/directory
 ```
 
 ## Usage
